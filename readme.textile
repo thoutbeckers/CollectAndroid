@@ -1,0 +1,72 @@
+h1. Collect Android
+
+This is a collection of Groovy-scripts that will build a replacement android.jar for use in your IDE.
+This one will containing all the scary non-public APIs that only Real Engineers like those who work at Google can handle.
+
+It will recursivly search the directories you specified, compile the Java files, create the AIDL interfaces, and use AAPT to generate the correct resources (R classes).
+
+The result is a new android.jar and a zip file containing all the source files.
+
+h2. Usage
+
+Of course first make sure you "use repo to get the android source.":http://source.android.com/source/downloading.html Use the @-b@ flag to get the correct version (froyo, gingerbread, etc).
+
+First edit the configuration in @CollectConfig.groovy@. I left my personal config in there as an example, and because I am too lazy to remove it. Of particular importance is the @rootdirs@ value. This will determine which packages (containing all those hidden APIs you want to use) will be included. 
+
+Then run @CollectAndroid.groovy@. Make sure you have @ant-launcher.jar@ and @ant.jar@ on the classpath. Sometimes Groovy does this for you already, but it doesn't always work (eg running directly from my IDE it fails for me).
+
+When the script runs it can sometimes finds duplicate classes, because the same class file is present twice in different directories. Sometime one of the files is missing a bunch of methods because it's some kind of stub, and if not careful that could be the file you end up with. There will be warnings in the output listing the files included twice or more. So be wary of these!
+
+All groovy script can also be used individually. Keep in mind that including more directories in the new jar might make your IDE slower.
+
+h2. You can't explain that
+
+CollectPaths searches for the roots of Java and Android files, and saves the paths.
+
+CollectCopyContent gathers all the files in one place
+
+CollectAAPT generates the resource files, it also recognizes the "res/core" package for creating public resources.
+
+CollectAIDLup generates the interfaces for AIDL services
+
+CollectCompile compiles all the classes with the ECJ (eclipse) compiler, ignoring all errors.
+
+CollectPackage creates the jar and sources zip file.
+
+h2. Usage with Eclipse
+
+Replace the @android.jar@ file in the Android SDK for the platform you build for. Extract the sources to a @sources@ directory as a subdirectory of the dir where @android.jar@ is (the ADT eclipse plugin is hardcoded to look at this location). Finally, either globally or just for your project change the compilation settings (under Java Compiler -> Error / Warnings). Under "deprecated or restricted" change "forbidden reference" to _warning_ or _ignore_.
+
+h2. How well does it work?
+
+I only tested this on 2 different OSX machines. The code is "fragile" at best, and rather hacked together (using rather dubious parsing here and there).  
+
+If you try this on your machine and it actually works or horribly fails, comments are welcome of course.
+
+h2. License
+
+The MIT License
+
+Copyright (c) 2010 Tijl Houtbeckers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+
+
+
+ 
