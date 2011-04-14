@@ -3,7 +3,7 @@ h1. Collect Android
 This is a collection of Groovy-scripts that will build a replacement android.jar for use in your IDE.
 This one will containing all the scary non-public APIs that only Real Engineers like those who work at Google can handle.
 
-It will recursivly search the directories you specified, compile the Java files, create the AIDL interfaces, and use AAPT to generate the correct resources (R classes).
+It will recursively search the directories you specified, compile the Java files, create the AIDL interfaces, and use AAPT to generate the correct resources (R classes).
 
 The result is a new android.jar and a zip file containing all the source files.
 
@@ -35,7 +35,7 @@ CollectPackage creates the jar and sources zip file.
 
 h2. Usage with Eclipse
 
-Replace the @android.jar@ file in the Android SDK for the platform you build for. Extract the sources to a @sources@ directory as a subdirectory of the dir where @android.jar@ is (the ADT eclipse plugin is hardcoded to look at this location). Finally, either globally or just for your project change the compilation settings (under Java Compiler -> Error / Warnings). Under "deprecated or restricted" change "forbidden reference" to _warning_ or _ignore_.
+Replace the @android.jar@ file in the Android SDK for the platform you build for. Extract the sources to a @sources@ directory as a subdirectory of the dir where @android.jar@ is (the ADT eclipse plugin is hard-coded to look at this location). Finally, either globally or just for your project change the compilation settings (under Java Compiler -> Error / Warnings). Under "deprecated or restricted" change "forbidden reference" to _warning_ or _ignore_.
 
 h2. How well does it work?
 
