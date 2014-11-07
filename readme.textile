@@ -7,6 +7,8 @@ It will recursively search the directories you specified, compile the Java files
 
 The result is a new android.jar and a zip file containing all the source files.
 
+**NOTE:** I have not personally used these scripts since 2.3/Gingerbread, so they will for sure need tweaking for any modern version of Android.
+
 h2. Usage
 
 Of course first make sure you "use repo to get the android source.":http://source.android.com/source/downloading.html Use the @-b@ flag to get the correct version (froyo, gingerbread, etc).
